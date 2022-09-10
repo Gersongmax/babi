@@ -89,6 +89,20 @@ public class ListaMateriaisTest extends TestCase {
     public void testListAssembly() {
         Assembly floppy = null;
         // acrescentar código p/  completar teste
+    	PiecePart Disco = new PiecePart(new PartNumber(11), "Disco", 17.0);
+    	PiecePart Anel = new PiecePart(new PartNumber(5), "Anel de tracao", 2.0);
+    	PiecePart Discomagnetico = new PiecePart(new PartNumber(6), "Disco Magnetico", 15.0);
+    	PiecePart CaixaPlastica = new PiecePart(new PartNumber(12), "Caixa Plastica", 5.0);
+    	PiecePart TampaCorredica = new PiecePart(new PartNumber(13), "Tampa Corredica",4.0);
+    	PiecePart FolhaAluminio = new PiecePart(new PartNumber (3), "Folha Aluminio",3.0);
+    	PiecePart Mola = new PiecePart(new PartNumber (4), "Mola",1.0);
+    	
+        Assembly Disquete = new Assembly(new PartNumber(1), "Disquete");
+        Assembly Disco = new Assembly(new PartNumber(11), "Disco");
+        Assembly TampaCorredica
+    
+        
+      
         String expected = 
             "Parte: 1; Descricao: Disquete; Custo: 26.0\n" +
             " Parte: 11; Descricao: Disco; Custo: 17.0\n" +
