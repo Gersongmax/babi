@@ -23,4 +23,14 @@ public class PartNumber {
     public int getNumber() {
         return number;
     }
+    
+   //adicionando partNumbertostring 
+    
+    public String partNumberToString() {
+    	
+    	
+    	return Integer.toString(number);
+    	
+    	
+  }
 }

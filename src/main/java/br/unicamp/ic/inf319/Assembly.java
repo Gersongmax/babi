@@ -3,6 +3,8 @@ package br.unicamp.ic.inf319;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <img src="./doc-files/Assembly.png" alt="Assembly">
@@ -48,15 +50,38 @@ public class Assembly extends Part {
      *
      * @param thePart
      */
-    public void addPart(Part thePart) {
-        parts.add(thePart);
-    }
 
-    /**
-     *
-     * @return
-     */
-    public Set<Part> getParts() {
-        return parts;
-    }
+public void addPart(Part thePart) {
+    parts.add(thePart);
 }
+
+/**
+ *
+ * @return
+ */
+public Set<Part> getParts() {
+    return parts;
+}
+
+ public String print(Integer level) {
+    	StringBuilder printedLines = new StringBuilder();
+    	
+    	printedLines.append (super.print(level));
+    	
+    	List<Part> sorted = getParts().stream()
+    			.sorted((p1,p2) -> Integer.compare(p1.getPartNumber().getNumber(), p2.getPartNumber().getNumber() ))
+    			.collect(Collectors.toList());
+    	
+    	for (Part part :sorted) {
+    		
+    		printedLines.append(part.print(level+1));
+    		
+    		//System.out.println(part.toString());
+    	}
+    	return printedLines.toString();
+ }
+}
+    	
+    
+ 
+

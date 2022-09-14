@@ -48,4 +48,21 @@ public abstract class Part {
     public PartNumber getPartNumber() {
         return partNumber;
     }
+    
+    //montando a string completa do print
+    public String print(Integer level) {
+    	String levels = level > 0 ? String.format(String.format("%%%ds", level), " ") : "";
+   			
+	   	return String.format(
+			"%sParte: %s; Descricao: %s; Custo: %.1f\n", 
+			levels, 
+			getPartNumber().partNumberToString(),
+			getDescription(), 
+			cost()
+		);	
+	   	
+}
+    public String list() {
+		return print(0);
+    }
 }

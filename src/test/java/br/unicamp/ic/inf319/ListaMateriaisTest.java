@@ -87,31 +87,62 @@ public class ListaMateriaisTest extends TestCase {
     }
     
     public void testListAssembly() {
-        Assembly floppy = null;
-        // acrescentar código p/  completar teste
-    	PiecePart Disco = new PiecePart(new PartNumber(11), "Disco", 17.0);
-    	PiecePart Anel = new PiecePart(new PartNumber(5), "Anel de tracao", 2.0);
-    	PiecePart Discomagnetico = new PiecePart(new PartNumber(6), "Disco Magnetico", 15.0);
-    	PiecePart CaixaPlastica = new PiecePart(new PartNumber(12), "Caixa Plastica", 5.0);
-    	PiecePart TampaCorredica = new PiecePart(new PartNumber(13), "Tampa Corredica",4.0);
-    	PiecePart FolhaAluminio = new PiecePart(new PartNumber (3), "Folha Aluminio",3.0);
-    	PiecePart Mola = new PiecePart(new PartNumber (4), "Mola",1.0);
-    	
-        Assembly Disquete = new Assembly(new PartNumber(1), "Disquete");
-        Assembly Disco = new Assembly(new PartNumber(11), "Disco");
-        Assembly TampaCorredica
-    
-        
+       // Assembly floppy = null;
       
-        String expected = 
-            "Parte: 1; Descricao: Disquete; Custo: 26.0\n" +
-            " Parte: 11; Descricao: Disco; Custo: 17.0\n" +
-            "  Parte: 5; Descricao: Anel de tracao; Custo: 2.0\n" +
-            "  Parte: 6; Descricao: Disco magnetico; Custo: 15.0\n" +
-            " Parte: 12; Descricao: Caixa plastica; Custo: 5.0\n" +
-            " Parte: 13; Descricao: Tampa corredica; Custo: 4.0\n" +
-            "  Parte: 3; Descricao: Folha de aluminio; Custo: 3.0\n" +
-            "  Parte: 4; Descricao: Mola; Custo: 1.0\n";
-        assertEquals(expected, floppy.list());
+        // partes da Tampa corredica
+        PiecePart folhaAluminio = new PiecePart(new PartNumber (3), "Folha de aluminio",3.0);
+        PiecePart mola = new PiecePart(new PartNumber (4), "Mola",1.0);
+        
+       // partes do disco
+        PiecePart Anel = new PiecePart(new PartNumber(5), "Anel de tracao", 2.0);
+    	PiecePart DiscoMagnetico = new PiecePart(new PartNumber(6), "Disco magnetico", 15.0);
+        
+    	// parte Caixa
+    	
+    	PiecePart CaixaPlastica = new PiecePart(new PartNumber(12), "Caixa plastica", 5.0);
+    	
+    	// Caixa
+    	
+    	//Assembly Caixa = new Assembly(new PartNumber(12), "Caixa Plastica");
+    	//Caixa.addPart(CaixaPlastica);
+    	
+    	//Tampa corredica montada
+    	Assembly TampaCorredica = new Assembly(new PartNumber(13), "Tampa corredica");
+    	TampaCorredica.addPart(folhaAluminio);
+    	TampaCorredica.addPart(mola);
+    	
+    	// Disco montado
+    	Assembly Disco = new Assembly(new PartNumber(11), "Disco");
+    	Disco.addPart(Anel);
+    	Disco.addPart(DiscoMagnetico);
+    	
+    	 // Disquete montado   	
+        Assembly Disquete = new Assembly(new PartNumber(1), "Disquete");
+        Disquete.addPart(TampaCorredica);
+        Disquete.addPart(Disco);
+        Disquete.addPart(CaixaPlastica);
+       
+        
+        assertEquals(26.0, Disquete.cost());
+        assertEquals(4.0 , TampaCorredica.cost());
+        assertEquals(17.0 , Disco.cost());
+        assertEquals(5.0 , CaixaPlastica.cost());
+    
+    
+        StringBuilder expected = new StringBuilder();
+      
+        expected.append(String.format ("Parte: 1; Descricao: Disquete; Custo: 26.0\n"  ));
+        expected.append(String.format (" Parte: 11; Descricao: Disco; Custo: 17.0\n" ));
+        expected.append(String.format ("  Parte: 5; Descricao: Anel de tracao; Custo: 2.0\n" ));
+        expected.append(String.format ("  Parte: 6; Descricao: Disco magnetico; Custo: 15.0\n"));
+        expected.append(String.format (" Parte: 12; Descricao: Caixa plastica; Custo: 5.0\n" ));
+        expected.append(String.format (" Parte: 13; Descricao: Tampa corredica; Custo: 4.0\n"));
+        expected.append(String.format ("  Parte: 3; Descricao: Folha de aluminio; Custo: 3.0\n"));
+        expected.append(String.format ("  Parte: 4; Descricao: Mola; Custo: 1.0\n"));
+        
+       
+        
+        String result = Disquete.print(0);
+        assertEquals(expected.toString(), result);
     }
 }
